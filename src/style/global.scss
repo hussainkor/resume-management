@@ -1,0 +1,193 @@
+@import "./mixins";
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+:root {
+  --blue: #4864ff;
+  --bg-color: #fff;
+  --text-color1: #000;
+  --text-color2: #555;
+}
+a {
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+}
+img {
+  width: 100%;
+}
+.wrapper {
+  width: 100%;
+  height: calc(100vh - 60px);
+  padding: 2rem;
+}
+.content {
+  @include d-flex(column, flex-start, center);
+  gap: 2rem;
+}
+.profile-box {
+  @include d-flex(row, flex-start, center);
+  gap: 2rem;
+  .profile-pic,
+  .profile-data {
+    flex: 1;
+  }
+  .profile-pic img {
+    border-radius: 10px;
+  }
+  .profile-data {
+    h3 {
+      margin: 10px 0 20px;
+    }
+    p {
+      margin: 15px 0;
+    }
+  }
+}
+.app {
+  height: 100vh;
+  color: var(--text-color1);
+  background: var(--bg-color);
+  transition: all 0.5s ease-in-out;
+
+  &.dark {
+    --bg-color: #000;
+    --text-color1: #fff;
+    --text-color2: #999;
+  }
+}
+
+.content {
+  margin: auto;
+  max-width: 900px;
+  padding-top: 40px;
+  &.bg-trans {
+    background: #e1e1e1;
+    padding: 40px 10px 40px;
+    border-radius: 5px;
+  }
+}
+.page-manage {
+  margin: auto;
+  max-width: 1200px;
+  padding: 20px 0;
+
+  h3 {
+    font-size: 23px;
+    margin: 20px 0 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+table {
+  width: 100%;
+  border: 1px solid #dadde1;
+  th {
+    text-align: left;
+    padding: 8px 10px;
+    background: #29b8eb;
+    color: #fff;
+    font-weight: 600;
+  }
+  td {
+    padding: 8px 10px;
+    font-weight: normal;
+    border-bottom: 1px solid #dadde1;
+  }
+}
+
+.page-box {
+  width: 100%;
+  height: 100%;
+  @include d-flex(column, center, center);
+}
+.navbar {
+  @include d-flex(row, space-between, center);
+  background: #333;
+  height: 60px;
+  padding: 0px 2rem;
+
+  .brand {
+    color: #fff;
+    flex: 1;
+
+    a {
+      margin: 1rem 0;
+    }
+  }
+
+  .menu {
+    &.mob-menu {
+      display: none;
+      transition: all 0.5s ease-in-out;
+    }
+    ul {
+      @include d-flex(row, flex-start, center);
+      gap: 1rem;
+
+      li {
+        a {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  .hamburger {
+    display: none;
+  }
+
+  .toggle {
+    margin-left: 1rem;
+    svg {
+      color: var(--blue);
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .navbar {
+    padding: 0px 1rem;
+
+    .menu {
+      gap: 1rem;
+      color: #fff;
+      background: #666;
+      width: 240px;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: -240px;
+      z-index: 4;
+      transition: all 0.5s ease-in-out;
+      &.open {
+        left: 0;
+      }
+      ul {
+        @include d-flex(column, center, center);
+        height: 100%;
+        gap: 2rem;
+
+        li {
+          a {
+            color: #fff;
+          }
+        }
+      }
+    }
+
+    .hamburger {
+      display: block;
+      color: #fff;
+      cursor: pointer;
+    }
+  }
+}
